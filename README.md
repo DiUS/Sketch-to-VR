@@ -33,3 +33,57 @@ Demo: https://www.youtube.com/watch?v=lJ7aFtqsAUU
 - Code structure borrowed from: https://github.com/Raureif/sketch-click-dummy
 - Photo from demo template file: https://www.flickr.com/photos/globalvoyager/27869867466/
 - SimpleHTTPServer: http://www.scottmadethis.net/interactive/simpleserver/
+
+##eat.rent
+The steps required are:
+
+1) use sketch to create images
+2) upload images to s3
+  * Using a sketch plugin
+  * Post the files to an api endpoint
+  * that ‘system’ saves the files to s3
+3) view images in VR
+  * VR application talks to s3 bucket
+
+This setup could be separated out into
+
+Sketch - Front end for creating resources, PUT data to Resources service
+VR Viewer - GET data from Resources service, either via api or directly
+Amazon resources - Resources service
+
+We can use an amazon api gateway to talk directly to a s3 bucket
+http://docs.aws.amazon.com/apigateway/latest/developerguide/integrating-api-with-aws-services-s3.html
+
+* We need a new s3 policy for our new IAM role:
+
+'''
+{
+  "Version": "2012-10-17",
+    "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:Get*",
+        "s3:List*",
+        "s3:Put*",
+        "s3:Post*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+'''
+
+* Create an 'Amazon API Gateway' IAM role and attach the new policy
+
+* Create API Resources to Represent Amazon S3 Resources
+  * create an API named sketch-to-vr. This API's root resource (/) represents the Amazon S3 service.
+  * Under the API's root resource, create a child resource named Folder and set the required Resource Path as /{folder}.
+  * For the API's Folder resource, create an Item child resource. Set the required Resource Path as /{item}.
+* Create our endpoints. We are interested in PUT and GET
+  * follow instructions from the url to setup the get endpoint
+  * follow instructions from the url to setup our IAM role to control access to the GET method under 'Method Request'
+  * follow instruction to add 200,400,500 http reponses under 'Method Response'
+  * follow instruction to setup 'Integration Response'
+  * follow instructions to add GET and PUT method requests under '/{folder}' in the resources tree
+    * for future ref - http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html#RESTBucketPUT-requests

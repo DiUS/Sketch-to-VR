@@ -1,15 +1,25 @@
 {
     "name" : "Sketch To VR",
-    "identifier" : "com.liuliu.sketch2vr",
-    "version" : "2.0.1",
-    "description" : "Turn your Mocks into VR. ",
-    "authorEmail" : "liuxliu@google.com",
+    "identifier" : "com.threedius.sketch2vr",
+    "version" : "1.0.0",
+    "description" : "Create VR mocks, save to s3, test on mobile",
+    "authorEmail" : "mbutt@dius.com.au",
     "author" : "Liu Liu",
     "commands" : [
     {
-      "script" : "export.js",
-      "name" : "Export",
-      "identifier" : "export"
+      "script" : "save-vr-layouts.js",
+      "name" : "Save VR layouts to Documents",
+      "identifier" : "save-vr-layouts"
+    },
+    {
+      "script" : "export-vr-ui-to-s3.js",
+      "name" : "Export VR UI to s3",
+      "identifier" : "export-vr-ui-to-s3"
+    },
+    {
+      "script" : "export-vr-background-to-s3.js",
+      "name" : "Export VR background to s3",
+      "identifier" : "export-vr-background-to-s3"
     }
   ]
 }
