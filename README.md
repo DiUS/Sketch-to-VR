@@ -22,7 +22,7 @@ Demo: https://www.youtube.com/watch?v=lJ7aFtqsAUU
 4. Go to 'Plugins > Sketch to VR > Export VR UI to s3' to push the ui layer to s3
 
 ##View your mocks in VR
-View the results in the [Mobile viewer](http://3dius-sketch-to-vr-frontend.s3-website-us-west-2.amazonaws.com/)
+View the results in the [Mobile viewer](http://3dius-sketch-to-vr.s3-website-ap-southeast-2.amazonaws.com/)
 
 ##Troubleshooting
 - For now, the layers must be called 'background' and 'ui'
